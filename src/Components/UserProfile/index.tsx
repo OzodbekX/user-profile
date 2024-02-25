@@ -4,6 +4,7 @@ import axios from 'axios';
 import  ViewUser  from '../ViewUser';
 import  EditForm  from '../EditForm';
 import "./index.scss"
+
 export type TUserData={
     firstName: string,
     lastName: string,
@@ -12,8 +13,8 @@ export type TUserData={
 }
 const UserProfile = () => {
     const [userData, setUserData] = useState<TUserData>()
-    const [isEditting, setIsEditting] = useState(false)
-
+    const [isEditing, setIsEditing] = useState(false)
+    //gets data from backend
     const { isLoading, error, data } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>  axios.get('api/getData')
@@ -24,10 +25,9 @@ const UserProfile = () => {
             setUserData(data?.data)
         }
             },[data])
-
-
+    //to apply smooth transition in css I added new class by function.
     const cardClassName = (base_class: string) => {
-        if (isEditting) {
+        if (isEditing) {
             return base_class + " edit-page"
         }
         return base_class
@@ -36,8 +36,8 @@ const UserProfile = () => {
 
     return (
         <div className="wrapper">
-           <ViewUser cardClassName={cardClassName} isEditting={isEditting} setIsEditting={setIsEditting} userData={userData}/>
-           <EditForm cardClassName={cardClassName} isEditting={isEditting} setIsEditting={setIsEditting} userData={userData} setUserData={setUserData}/>
+           <ViewUser cardClassName={cardClassName} isEditing={isEditing} setIsEditing={setIsEditing} userData={userData}/>
+           <EditForm cardClassName={cardClassName} isEditing={isEditing} setIsEditing={setIsEditing} userData={userData} setUserData={setUserData}/>
         </div>
     );
 };
