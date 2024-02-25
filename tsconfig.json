@@ -20,6 +20,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "types": ["node", "jest", "@testing-library/jest-dom"],
+  "rootDir": "./src",
+  "moduleResolution": "node",
   "include": [
     "src"
   ]
