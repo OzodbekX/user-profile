@@ -37,7 +37,7 @@ const UserProfile = () => {
     return (
         <div className="wrapper">
            <ViewUser cardClassName={cardClassName} isEditing={isEditing} setIsEditing={setIsEditing} userData={userData}/>
-           <EditForm cardClassName={cardClassName} isEditing={isEditing} setIsEditing={setIsEditing} userData={userData} setUserData={setUserData}/>
+           <EditForm cardClassName={cardClassName} setIsEditing={setIsEditing} userData={userData} setUserData={setUserData}/>
         </div>
     );
 };

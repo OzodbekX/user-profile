@@ -7,9 +7,8 @@ const EditForm: FC<{
     cardClassName: (s: string) => string,
     userData?: TUserData,
     setUserData: Dispatch<SetStateAction<TUserData | undefined>>,
-    setIsEditing: Dispatch<SetStateAction<boolean>>,
-    isEditing: boolean
-}> = ({userData, setUserData, isEditing, cardClassName, setIsEditing}) => {
+    setIsEditing: Dispatch<SetStateAction<boolean>>
+}> = ({userData, setUserData, cardClassName, setIsEditing}) => {
     const [errorFields, setErrorFields] = useState<string[]>([])
     const queryClient = useQueryClient();
     const errorClassname = (base_class: string, field: string) => {
@@ -30,7 +29,7 @@ const EditForm: FC<{
             }
         } else {
             //validates fields on submit
-            let result = true
+            let result =true
             userData && Object.entries(userData).forEach((i: any) => {
                 let key: "firstName" | "lastName" | "email" = i[0] || "firstName"
                 let value = i?.[1] || ""
@@ -42,6 +41,7 @@ const EditForm: FC<{
                     setErrorFields(prev => [...prev, key])
                 }
             })
+
             return result
         }
 
@@ -63,7 +63,7 @@ const EditForm: FC<{
         onSuccess: (data) => {
             queryClient.invalidateQueries('api/userData');
             setUserData(data)
-            setIsEditing(!isEditing)
+            setIsEditing(false)
         },
     });
 
@@ -115,7 +115,8 @@ const EditForm: FC<{
                 </div>
             </div>
             <button onClick={onClickEdit} className="button-30"
-                    role="button">{isEditing ? "submit" : "Edit"}</button>
+                    role="button">Submit
+            </button>
 
         </div>
     </div>
